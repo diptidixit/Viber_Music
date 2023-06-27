@@ -1,0 +1,106 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+nav{
+    top: 0;
+    position:fixed;
+    width:100%;
+    display:flex;
+    background-color: black;
+    justify-content: space-between;
+}
+nav ul{
+    display: flex;
+    align-items: center;
+    list-style-type: none;
+    height: 65px;
+    color: white;
+}
+.logo {
+    display: flex;
+    align-items: center;
+    font-weight: bolder;
+    font-size: 1.3rem;
+    padding: 0 12px;
+}
+.logo img{
+    width: 40px;
+    padding: 0 8px;
+}
+nav ul li{
+    padding: 0 12px;
+}
+nav ul li a{
+    text-decoration: none;
+    color: #ffffff;
+}
+.rightnav{
+    float:right;
+    margin-right: 35px;
+    
+}
+.rightnav li{
+    padding: 0px 25px;
+    border: 5px;
+    border-style: outset;
+    border-color: #ff7070;
+    border-radius: 8px;
+    height: 20px;
+}
+.songs{
+    top: 30%;
+    background-color: pink;
+    color: #404040;
+    text-shadow: 1px 1px #ff8080;
+    margin: 80px 20px;
+    min-height: 67vh;
+    border-radius: 12px;
+    padding: 20px;
+    background-image: url('logo2.jpg');
+}
+.name{
+    cursor: pointer;
+}
+.trending ul{
+    display:flex;
+    list-style-type: none;
+    flex-wrap:wrap;
+    padding: 5px 0;
+}
+.cover img{
+    width: 170px;
+    margin: 5px 0px;
+    box-shadow: 1px 1px #ff7070;
+    border-radius: 10px;
+    cursor: pointer;
+}
+.cover {
+    margin: 0 12px;
+}
+.bottom{
+    position: fixed;
+    bottom: 0;
+    height: 130px;
+    background-color: black;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column; 
+    width: 100%;
+}
+.bottom img{
+    width: 35px;
+    padding: 5px 0px;
+}
+.icon img{
+    cursor: pointer;
+}
+#ProgressBar{
+    width: 80vw; 
+    cursor: pointer;
+    padding: 5px 0px;
+    color: blue;
+    background: pink;
+}

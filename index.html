@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Viber</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        nav{
+            top: 0;
+            position:fixed;
+            width:100%;
+            display:flex;
+            background-color: black;
+            justify-content: space-between;
+        }
+        nav ul{
+            display: flex;
+            align-items: center;
+            list-style-type: none;
+            height: 65px;
+            color: white;
+        }
+        .logo {
+            display: flex;
+            align-items: center;
+            font-weight: bolder;
+            font-size: 1.3rem;
+            padding: 0 12px;
+        }
+        .logo img{
+            width: 40px;
+            padding: 0 8px;
+        }
+        nav ul li{
+            padding: 0 12px;
+        }
+        nav ul li a{
+            text-decoration: none;
+            color: #ffffff;
+        }
+        .rightnav{
+            float:right;
+            margin-right: 35px;
+            
+        }
+        .rightnav li{
+            padding: 0px 25px;
+            border: 5px;
+            border-style: outset;
+            border-color: #ff7070;
+            border-radius: 8px;
+            height: 20px;
+        }
+        .songs{
+            top: 30%;
+            background-color: pink;
+            color: #404040;
+            text-shadow: 1px 1px #ff8080;
+            margin: 80px 20px;
+            min-height: 67vh;
+            border-radius: 12px;
+            padding: 20px;
+            background-image: url('logo2.jpg');
+        }
+        .name{
+            cursor: pointer;
+        }
+        .trending ul{
+            display:flex;
+            list-style-type: none;
+            flex-wrap:wrap;
+            padding: 5px 0;
+        }
+        .cover img{
+            width: 170px;
+            margin: 5px 0px;
+            box-shadow: 1px 1px #ff7070;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+        .cover {
+            margin: 0 12px;
+        }
+        .bottom{
+            position: fixed;
+            bottom: 0;
+            height: 130px;
+            background-color: black;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column; 
+            width: 100%;
+        }
+        .bottom img{
+            width: 35px;
+            padding: 5px 0px;
+        }
+        .icon img{
+            cursor: pointer;
+        }
+        #ProgressBar{
+            width: 80vw; 
+            cursor: pointer;
+            padding: 5px 0px;
+            color: blue;
+            background: pink;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="leftnav">
+            <ul>
+                <li class="logo"><img src="images/logo2.png">VIBER</li>
+                <li><a href="/">Home</a></li>
+                <li><a href="/playlist">Playlist</a></li>
+            </ul>
+        </div>
+        <div class="rightnav">
+            <ul>
+                <li><a href="/login">Login</a></li>
+                <li><a href="/signup">Signup</a></li>
+            </ul>
+        </div>
+    </nav>
+    <div class="songs">
+        <div class="trending">
+            <h1>Trending...</h1>
+            <ul>
+                <li class="cover">
+                    <img src="images/cover1.jpg" id="0" class="playsong">
+                    <h3 class="name playsong" id="0">Song</h3>
+                </li>
+                <li class="cover">
+                    <img src="images/cover1.jpg" id="1" class="playsong">
+                    <h3 class="name playsong" id="1">Song</h3>
+                </li>
+                <li class="cover">
+                    <img src="images/cover1.jpg" id="2" class="playsong">
+                    <h3 class="name playsong" id="2">Song</h3>
+                </li>
+                <li class="cover">
+                    <img src="images/cover1.jpg" id="3" class="playsong">
+                    <h3 class="name playsong" id="3">Song</h3>
+                </li>
+            </ul> 
+        </div> 
+    </div>
+    <div class="bottom">
+        <input type="range" name="range" id="ProgressBar" min="0" value="0" max="100">
+        <div class="icon">
+            <img src="images/playw.png" id="play">
+        </div>
+    </div>
+    <script>
+        let songIndex = 0;
+        let audio = new Audio('songs/song1.mp3');
+        let Play = document.getElementById('play');
+        let ProgressBar = document.getElementById('ProgressBar');
+        let songItems = Array.from(document.getElementsByClassName('cover'));
+        let songs = [
+            {songName: "Distance Love", filePath: "songs/song1.mp3", coverPath: "images/cover1.jpg"},
+            {songName: "Enemy", filePath: "songs/song2.mp3", coverPath: "images/cover2.jpg"},
+            {songName: "Jachdi", filePath: "songs/song3.mp3", coverPath: "images/cover3.jpg"},
+            {songName: "Intehaan", filePath: "songs/song4.mp3", coverPath: "images/cover4.jpg"}
+        ]
+
+        songItems.forEach((element, i)=>{ 
+            element.getElementsByTagName("img")[0].src = songs[i].coverPath; 
+            element.getElementsByClassName("name")[0].innerText = songs[i].songName; 
+        })
+
+        Play.addEventListener('click', ()=>{
+            if(audio.paused || audio.currentTime<=0){
+                audio.play();
+                Play.src="images/pausew.jpg";
+            }
+            else{
+                audio.pause();
+                Play.src="images/playw.png";
+            }
+        })
+        ProgressBar.addEventListener('change', ()=>{
+            audio.currentTime = ProgressBar.value * audio.duration/100;
+        })
+        audio.addEventListener('timeupdate', ()=>{ 
+            progress = parseInt((audio.currentTime/audio.duration)* 100); 
+            console.log(audio.currentTime);
+            console.log(audio.duration);
+            ProgressBar.value = progress;
+        })
+
+        Array.from(document.getElementsByClassName('playsong')).forEach((element)=>{
+            element.addEventListener('click', (e)=>{ 
+                songIndex = parseInt(e.target.id);
+                audio.src = `song${songIndex+1}.mp3`;
+                audio.currentTime = 0;
+                audio.play();
+                Play.src="pausew.jpg";
+            })
+        })
+    </script>
+</body>
+</html>
